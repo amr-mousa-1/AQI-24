@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AQI24 Path to Clean Air</title>
+    <link rel="stylesheet" href="Styles1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Additional styles for NASA section */
+        .nasa-training-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .nasa-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            width: 48%;
+            min-width: 300px;
+            border-left: 4px solid #4fc3f7;
+            transition: transform 0.3s ease;
+        }
+        
+        .nasa-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .nasa-card h4 {
+            color: #4fc3f7;
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(79, 195, 247, 0.3);
+            padding-bottom: 8px;
+        }
+        
+        .nasa-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .nasa-card ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ddd;
+        }
+        
+        .nasa-card ul li:last-child {
+            border-bottom: none;
+        }
+        
+        .nasa-card ul li:before {
+            content: "•";
+            color: #4fc3f7;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .nasa-card p {
+            color: #ddd;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .nasa-video-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 40px auto;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nasa-video-container h4 {
+            color: #4fc3f7;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .video-wrapper {
+            margin: 20px 0;
+        }
+        
+        .video-wrapper iframe {
+            width: 100%;
+            height: 500px;
+            border-radius: 8px;
+            border: 2px solid rgba(79, 195, 247, 0.3);
+        }
+        
+        .video-links {
+            margin-top: 20px;
+        }
+        
+        .video-links .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .video-links .btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .video-note {
+            color: #ddd;
+            font-style: italic;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .nasa-card {
+                width: 100%;
+            }
+            
+            .video-wrapper iframe {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .video-wrapper iframe {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+
+    <nav class="navbar">
+        <div class="logo">AQI24</div>
+        <div class="nav-links">
+            <a href="index.html" data-page="home-page">Home</a>
+            <a href="about.html" data-page="about-page">About Us</a>
+            <a href="forecast.html" data-page="forecast-page">Forecast Weather</a>
+            <a href="TEMPO.html" data-page="TEMPO Data">TEMPO Data</a>
+            <a href="login.html" data-page="login-page" class="login-btn">Log In</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div id="home-page" class="page-container active">
+            <header class="hero">
+                <h1>AQI24 Path to Clean Air</h1>
+                <p>Harnessing satellite intelligence to shape cleaner, safer skies</p>
+                <a href="#pollution-info" class="btn">Learn More</a>
+            </header>
+
+            <section id="pollution-info" class="pollution-section">
+                <h2>What is Air Pollution?</h2>
+                <div class="pollution-content">
+                    <div class="text">
+                        <h3>Air Pollution</h3>
+                    <p> Air pollution is the contamination of the indoor or outdoor environment by chemical, physical, or biological agents that modify the natural characteristics of the atmosphere. Common sources include household combustion devices, motor vehicles, industrial facilities, and forest fires. Pollutants of major public health concern, such as particulate matter, carbon monoxide, ozone, nitrogen dioxide, and sulfur dioxide, cause respiratory and other diseases, making air pollution a significant source of morbidity and mortality worldwide. According to WHO data, almost all of the global population (99%) breathes air that exceeds WHO guideline limits and contains high levels of pollutants, with the highest exposures occurring in low- and middle-income countries.</p>
+                    <p style="margin-top: 20px;"> The issue of air quality is closely linked to the earth's climate and ecosystems globally. Importantly, many of the drivers of air pollution, like the combustion of fossil fuels, are also sources of greenhouse gas emissions. Therefore, policies aimed at reducing air pollution offer a win-win strategy for both climate and human health. These measures lower the burden of disease attributable to air pollution while also contributing to the near- and long-term mitigation of climate change.</p>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="effects-section">
+                <h2>Air Pollution Impacts</h2>
+                <div class="effects-cards">
+                    <div class="card">
+                        <h3>Health Impact</h3>
+                        <p>Air pollution poses a major threat to health. Ambient air pollution causes fine particulate matter which results in strokes, heart diseases, lung cancer, and acute and chronic respiratory diseases. The combined effects of ambient and household air pollution are associated with 7 million premature deaths annually.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Household Air Pollution</h3>
+                        <p>Around 2.4 billion people are exposed to dangerous levels of household air pollution. This exposure occurs while using polluting open fires or simple stoves for cooking fuelled by kerosene, biomass (wood, animal dung and crop waste), and coal, which significantly contributes to the global health burden.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Sources and Solutions</h3>
+                        <p>Sources of air pollution are multiple. The major outdoor pollution sources include residential energy for cooking and heating, vehicles, power generation, and industry. Policies and investments that support sustainable land use, cleaner household energy and transport, and better municipal waste management can reduce key sources of ambient air pollution.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="world-section">
+                <h2>Air Pollution Effects in the World</h2>
+                <div class="world-content">
+                    <div class="world-graph">
+                        <img src="Global Air Quality Challenges.png" alt="World Air Pollution Graph">
+                    </div>
+                    <div class="world-explanation">
+                        <h3>Global Air Quality Challenges</h3>
+                        <p>This chart shows global death rates from air pollution between 1990 and 2021. It covers three sources: outdoor ozone pollution, outdoor particulate pollution, and indoor air pollution from fuels. In 1990, the rate was about 180 deaths per 100,000 people, but it fell to nearly 100 by 2021, showing clear progress.</p>
+                        <p>Indoor air pollution was the main cause in the 1990s but dropped sharply as cleaner cooking and heating methods spread. Outdoor particulate pollution also declined but remains dangerous, as tiny particles damage the lungs and heart. Outdoor ozone pollution is smaller but has stayed almost constant over time.</p>
+                        <p>Overall, the chart shows big improvements, especially indoors, but outdoor pollution is still a serious challenge. Stronger policies to cut emissions and expand clean energy are needed to protect health worldwide. Air pollution remains one of the biggest global health threats, and progress must continue to ensure safe air for everyone.</p>
+                    </div>
+                </div>
+                <div class="world-points">
+                    <div class="world-point">
+                        <h4>Health Impact</h4>
+                        <p>Air pollution is linked to respiratory diseases, cardiovascular problems, and increased risk of stroke. Children and the elderly are particularly vulnerable to its effects.</p>
+                    </div>
+                    <div class="world-point">
+                        <h4>Economic Costs</h4>
+                        <p>The global economic cost of air pollution is estimated at over $5 trillion annually, including healthcare expenses and lost productivity.</p>
+                    </div>
+                    <div class="world-point">
+                        <h4>Environmental Damage</h4>
+                        <p>Air pollution contributes to acid rain, damages ecosystems, reduces crop yields, and accelerates climate change through greenhouse gas emissions.</p>
+                    </div>
+                </div>
+            </section>
+
+                <section class="learn-more-section">
+                    <a href="https://ourworldindata.org/grapher/death-rate-by-source-from-air-pollution?time=earliest..2021" class="btn" target="_blank">
+                        Global Air Quality Challenges
+                    </a>
+                </section>
+
+            <section class="egypt-section">
+                <h2>Air Pollution Effects in Egypt</h2>
+                <div class="egypt-content">
+                    <div class="egypt-graph">
+                        <img src="air.png" alt="Egypt Air Pollution Graph">
+                    </div>
+                    <div class="egypt-explanation">
+                        <h3>Egypt's Air Quality Challenges</h3>
+                        <p>The pie chart shows the status of air quality in different levels. The largest share, 38%, is in the "Emergency" category, which means the air was extremely polluted and unsafe. Another 25% falls under "Alert," also showing dangerous pollution levels.</p>
+                        <p>At the same time, 25% of the readings were "Normal," where the air quality was acceptable, and 12% were in the "Attention" category, which means pollution was moderate but still concerning.</p>
+                        <p>No data was recorded for "Clean," "Moderate," or "Warning," all standing at 0%. This highlights that safe and fresh air was almost absent, while most of the time air pollution was harmful.</p>
+                    </div>
+                </div>
+                <div class="egypt-points">
+                    <div class="egypt-point">
+                        <h4>Urban Centers</h4>
+                        <p>Cairo and other major cities experience high levels of pollution due to traffic congestion and industrial activities. The high population density and aging vehicle fleet contribute significantly to poor air quality in urban areas.</p>
+                    </div>
+                    <div class="egypt-point">
+                        <h4>Agricultural Impact</h4>
+                        <p>Seasonal burning of agricultural waste, particularly rice straw, contributes significantly to air pollution, especially during specific months. This practice releases large amounts of particulate matter and harmful gases into the atmosphere.</p>
+                    </div>
+                    <div class="egypt-point">
+                        <h4>Health Consequences</h4>
+                        <p>Respiratory illnesses have increased in areas with poor air quality, affecting vulnerable populations the most. Children, the elderly, and those with pre-existing conditions face the highest risk from prolonged exposure to polluted air.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="learn-more-section">
+                <a href="https://www.scirp.org/journal/paperinformation?paperid=88413" class="btn" target="_blank">Egypt's Air Quality Challenges</a>
+            </section>
+        </div>
+            <section id="pollution-info" class="pollution-section">
+                <h2>What is the meaning of Air Quality Index?</h2>
+                <div class="pollution-content">
+                    <div class="text">
+                    <h3>Air Quality Index</h3>
+                    <p>The Air Quality Index, or AQI, is a standardized tool used to report how clean or polluted the air currently is and what associated health effects might be a concern. It functions like a thermometer, but instead of showing temperature, it shows levels of major air pollutants regulated by the Clean Air Act, including ground-level ozone, particle pollution, carbon monoxide, sulfur dioxide, and nitrogen dioxide. The AQI translates complex air quality data into a simple color-coded scale, making it easy for the public to understand the state of their air at a glance.</p>
+                    <br>
+                    <P>The AQI scale is divided into color-coded categories that range from 0 to 500. A low AQI value, represented by green (0-50), means air quality is good, while a high AQI value, represented by maroon (301-500), signifies hazardous conditions. Each category corresponds to a different level of health concern. For example, when the AQI is in the "unhealthy for sensitive groups" range, people with asthma or heart conditions may be at risk, while an "unhealthy" or "hazardous" AQI warns that everyone may experience serious health effects.</p>
+                    </div>
+                </div>
+            </section>
+            <br>
+
+            <!-- New NASA NO2 Measurement Section -->
+            <section id="nasa-no2" class="pollution-section">
+                <h2>How NASA Measures Nitrogen Dioxide (NO2)</h2>
+                <div class="pollution-content">
+                    <div class="text">
+                        <h3>NASA's Approach to Monitoring Air Pollution</h3>
+                        <p>This training is tailored to those interested in learning how to access and visualize NASA satellite imagery. With the world's eyes and media coverage turned to recent global changes in air pollution, this two-part webinar series provides a primer for the novice and a good refresher course for all others. Participants will learn which pollutants can be measured from space, how satellites make these measurements, the do's and don'ts of interpreting satellite data, and how to download and create your own visualizations.</p>
+                        
+                        <!-- YouTube Video Section -->
+                        <div class="nasa-video-container">
+                            <h4>NASA ARSET: How NASA Measures Nitrogen Dioxide</h4>
+                            <p>Watch this introductory webinar to learn more about how NASA measures air pollution from space.</p>
+                            <div class="video-wrapper">
+                                <iframe src="https://www.youtube.com/embed/truE3iCaGt8" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-links"> 
+                                <p class="video-note">Introductory Webinar: An Inside Look at How NASA Measures Air Pollution</p>
+                            </div>
+                        </div>
+                        
+                        <p>The Applied Sciences Program is part of the Earth Science Division of the NASA Science Mission Directorate. By learning to use NASA's satellite data, individuals and organizations can contribute to monitoring and addressing air pollution challenges in their communities.</p>
+                    </div>
+                </div>
+            </section>
+            <br>
+
+        <!-- <div id="about-page" class="page-container">
+            <section class="section">
+                <h2>About Us</h2>
+                <div class="about-content">
+                    <img src="logo.jpg" alt="AQI24 Logo">
+                    <div class="text">
+                        <h3>AQI24</h3>
+                        <p>We are a team in the NASA Space Apps Challenge, working on the Challenge: "From EarthData to Active Cloud Computing with Earth Observation Data for Preaching Cleaves, Safer Sides." Our project uses TEMPO satellite data and cloud computing to monitor and predict air quality, helping communities move toward a cleaner, safer future.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="vision-section">
+                <h2>Our Vision</h2>
+                <div class="vision-cards">
+                    <div class="card">
+                        <h3>Cleaner Sides for All</h3>
+                        <p>We envision a world where every community has access to accurate air quality insights. By combining satellites, we aim to build healthier, safe environments for people everywhere.</p>
+                    </div>
+                    <div class="card">
+                        <h3>From Data to Action</h3>
+                        <p>Our vision is to transform earth observation data into meaningful solutions. We come to bridge the gap between our scientific knowledge and everyday decisions that protect our planet.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Breathing the Future</h3>
+                        <p>We believe in using innovation to secure clouds for our generation ahead. Through advanced analysis of satellite and ground data, we empower communities to understand, predict, and improve air quality.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="team-section">
+                <h2>Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-row">
+                        <div class="team-member">
+                            <div class="member-image" style="background-image: url('https://media.licdn.com/dms/image/v2/D4E03AQHXeIX2731ZVg/profile-displayphoto-scale_400_400/B4EZi7_W2nGYAg-/0/1755500608765?e=1761782400&v=beta&t=tGz8d0UwWVwiP14EtSAHb4HTmBZjaXZNHscqLsF5Rfc')"></div>
+                            <h4>Amr Mousa</h4>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-image" style="background-image: url('https://media.licdn.com/dms/image/v2/D4E03AQHTzN5oIA2TJg/profile-displayphoto-scale_400_400/B4EZgX9ZD_GYAg-/0/1752748628890?e=1761782400&v=beta&t=M_fyIMNFJWaI5CiGwPLTnLh_5enSr4PqASt0_wOCJPs')"></div>
+                            <h4>Radwan Yahia</h4>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-image" style="background-image: url('https://media.licdn.com/dms/image/v2/D4D03AQFMDbEhxkuNBw/profile-displayphoto-scale_400_400/B4DZhHzMm0GsAg-/0/1753551261346?e=1761782400&v=beta&t=KtiK5piHJsCylOQAN940ujMvhsoqF_tTqewgjpPuX1I')"></div>
+                            <h4>Ahmed Mohamed</h4>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-image" style="background-image: url('profile.png')"></div>
+                            <h4>Salma Ahmed</h4>
+                        </div>
+                    </div>
+                    <div class="team-row">
+                        <div class="team-member">
+                            <div class="member-image" style="background-image: url('profile.png')"></div>
+                            <h4>Sama Esmaeil</h4>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-image" style="background-image: url('profile.png')"></div>
+                            <h4>Habiba Ahmed</h4>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="login-page" class="page-container">
+            <div class="login-box">
+                <h2>Log In</h2>
+                <form>
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn">LOG IN</button>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </form>
+            </div>
+        </div>
+
+        <div id="forecast-page" class="page-container">
+            <div class="forecast-box">
+                <div class="input-section">
+                    <h2>Forecast Weather</h2>
+                    <div class="input-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" name="location" placeholder="Enter location" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <button type="submit" class="btn">Search</button>
+                </div>
+                <div class="results-section">
+                    <h3>Weather Results</h3>
+                    <p>Location: [N/A]</p>
+                    <p>Date: [N/A]</p>
+                    <p>Temperature: [N/A]</p>
+                    <p>Air Quality Index: [N/A]</p>
+                    <p>Description: [N/A]</p>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About AQI24</h3>
+                <p>AQI24 is dedicated to providing accurate air quality forecasts using satellite data and advanced analytics to help communities breathe cleaner air.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html" data-page="home-page"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="about.html" data-page="about-page"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="forecast.html" data-page="forecast-page"><i class="fas fa-chevron-right"></i> Forecast Weather</a></li>
+                    <li><a href="login.html" data-page="login-page"><i class="fas fa-chevron-right"></i> Log In</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Assiut STEM School, Asyut, Egypt</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i>
+                    <span>+20 109 674 9447</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@aqi24.com</span>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest updates on air quality and environmental news.</p>
+                <form>
+                    <div class="input-group">
+                        <input type="email" placeholder="Your Email" required style="width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: none;">
+                    </div>
+                    <button type="submit" class="btn" style="margin-top: 10px; width: 100%;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 AQI24 Path to Clean Air. All Rights Reserved | NASA Space Apps Challenge</p>
+        </div>
+    </footer>
+
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pages = document.querySelectorAll('.page-container');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const footerLinks = document.querySelectorAll('footer a[data-page]');
+            const navbar = document.querySelector('.navbar');
+            
+            function switchPage(pageId) {
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                document.getElementById(pageId).classList.add('active');
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-page') === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                window.scrollTo(0, 0);
+            }
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    switchPage(pageId);
+                });
+            });
+            
+            footerLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    switchPage(pageId);
+                });
+            });
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            switchPage('home-page');
+        });
+    </script> -->
+</body>
+</html>

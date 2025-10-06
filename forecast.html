@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AQI24 Path to Clean Air</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('Background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            animation: bgAnimation 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes bgAnimation {
+            0% {
+                transform: scale(1);
+                filter: brightness(0.8);
+            }
+            50% {
+                transform: scale(1.05);
+                filter: brightness(1);
+            }
+            100% {
+                transform: scale(1.1);
+                filter: brightness(0.9);
+            }
+        }
+
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar .logo {
+            font-weight: bold;
+            font-size: 24px;
+            color: #4fc3f7;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .navbar .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar .nav-links .login-btn {
+            background-color: #007bff;
+        }
+
+        .main-content {
+            flex: 1;
+            width: 100%;
+            position: relative;
+            margin-top: 70px;
+        }
+
+        .page-container {
+            min-height: calc(100vh - 70px);
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        .page-container.active {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
+            position: relative;
+        }
+
+        /* Forecast Page Styles */
+        #forecast-page {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .forecast-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .forecast-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #4fc3f7;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .forecast-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .forecast-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .input-section {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .input-section h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.8rem;
+            color: #4fc3f7;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            box-sizing: border-box;
+            color: #333;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            border: none;
+            background: #4a90e2;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #3a80d2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .results-section {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 500px;
+            min-height: 300px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .results-section h3 {
+            margin-top: 0;
+            text-align: center;
+            font-size: 1.5rem;
+            color: #4fc3f7;
+            margin-bottom: 25px;
+        }
+
+        .result-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-item strong {
+            font-size: 1.1rem;
+            color: #4fc3f7;
+        }
+
+        .result-item span {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .weather-icon-large {
+            font-size: 4rem;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .temp-large {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .description-large {
+            font-size: 1.3rem;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: capitalize;
+        }
+
+        .aqi-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 10px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .aqi-good {
+            background: #4CAF50;
+        }
+
+        .aqi-moderate {
+            background: #FFC107;
+            color: #333;
+        }
+
+        .aqi-unhealthy {
+            background: #FF9800;
+        }
+
+        .aqi-very-unhealthy {
+            background: #F44336;
+        }
+
+        .aqi-hazardous {
+            background: #9C27B0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2rem;
+        }
+
+        .error {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 0, 0, 0.2);
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+            padding: 0 15px;
+        }
+
+        .footer-section h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #4fc3f7;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #007bff;
+        }
+
+        .footer-section p {
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-section ul li a:hover {
+            color: #4fc3f7;
+        }
+
+        .footer-section ul li a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: #4fc3f7;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background-color: #007bff;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 30px;
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .forecast-box {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .input-section, .results-section {
+                max-width: 100%;
+            }
+            
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-section {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .forecast-header h1 {
+                font-size: 2rem;
+            }
+            
+            .input-section, .results-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+
+    <nav class="navbar">
+        <div class="logo">AQI24</div>
+        <div class="nav-links">
+            <a href="index.html" data-page="home-page">Home</a>
+            <a href="about.html" data-page="about-page">About Us</a>
+            <a href="forecast.html" data-page="forecast-page">Forecast Weather</a>
+            <a href="TEMPO.html" data-page="TEMPO Data">TEMPO Data</a>
+            <a href="login.html" data-page="login-page" class="login-btn">Log In</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div id="forecast-page" class="page-container active">
+            <div class="forecast-header">
+                <h1>Weather Forecast</h1>
+                <p>Get accurate weather predictions for any location and date</p>
+            </div>
+            
+            <div class="forecast-box">
+                <div class="input-section">
+                    <h2>Search Weather</h2>
+                    <div class="input-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" name="location" placeholder="Enter city name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <button id="search-weather" class="btn">Get Weather Forecast</button>
+                </div>
+                
+                <div class="results-section">
+                    <h3>Weather Results</h3>
+                    <div id="loading-message" class="loading" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Loading weather data...
+                    </div>
+                    
+                    <div id="error-message" class="error" style="display: none;"></div>
+                    
+                    <div id="weather-results" style="display: none;">
+                        <div class="weather-icon-large" id="weather-icon">🌍</div>
+                        <div class="temp-large" id="result-temperature">--°C</div>
+                        <div class="description-large" id="result-description">--</div>
+                        
+                        <div class="result-item">
+                            <strong>Location:</strong>
+                            <span id="result-location">--</span>
+                        </div>
+                        <div class="result-item">
+                            <strong>Date:</strong>
+                            <span id="result-date">--</span>
+                        </div>
+                        <div class="result-item">
+                            <strong>Max Temperature:</strong>
+                            <span id="result-max-temp">--°C</span>
+                        </div>
+                        <div class="result-item">
+                            <strong>Min Temperature:</strong>
+                            <span id="result-min-temp">--°C</span>
+                        </div>
+                        <div class="result-item">
+                            <strong>Precipitation:</strong>
+                            <span id="result-precipitation">--%</span>
+                        </div>
+                        <div class="result-item">
+                            <strong>Wind Speed:</strong>
+                            <span id="result-wind">-- km/h</span>
+                        </div>
+                        <div class="result-item">
+                            <strong>Air Quality Index:</strong>
+                            <span id="result-aqi">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About AQI24</h3>
+                <p>AQI24 is dedicated to providing accurate air quality forecasts using satellite data and advanced analytics to help communities breathe cleaner air.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html" data-page="home-page"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="about.html" data-page="about-page"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="forecast.html" data-page="forecast-page"><i class="fas fa-chevron-right"></i> Forecast Weather</a></li>
+                    <li><a href="login.html" data-page="login-page"><i class="fas fa-chevron-right"></i> Log In</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Assiut STEM School, Asyut, Egypt</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i>
+                    <span>+20 109 674 9447</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@aqi24.com</span>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest updates on air quality and environmental news.</p>
+                <form>
+                    <div class="input-group">
+                        <input type="email" placeholder="Your Email" required style="width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: none;">
+                    </div>
+                    <button type="submit" class="btn" style="margin-top: 10px; width: 100%;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 AQI24 Path to Clean Air. All Rights Reserved | NASA Space Apps Challenge</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('search-weather').addEventListener('click', async function() {
+            const location = document.getElementById('location').value.trim();
+            const date = document.getElementById('date').value;
+            
+            if (!location || !date) {
+                alert("Please enter both location and date.");
+                return;
+            }
+
+            // Show loading message, hide error and previous results
+            document.getElementById('loading-message').style.display = 'block';
+            document.getElementById('error-message').style.display = 'none';
+            document.getElementById('weather-results').style.display = 'none';
+
+            try {
+                // Search for city coordinates
+                const geocodingUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}&count=1`;
+                const geocodingResponse = await fetch(geocodingUrl);
+                const geocodingData = await geocodingResponse.json();
+                
+                if (!geocodingData.results || geocodingData.results.length === 0) {
+                    throw new Error('City not found. Please try another name.');
+                }
+
+                const place = geocodingData.results[0];
+                
+                // Get weather forecast for specific date
+                const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${place.latitude}&longitude=${place.longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_mean,windspeed_10m_max&start_date=${date}&end_date=${date}&timezone=auto`;
+                const weatherResponse = await fetch(weatherUrl);
+                const weatherData = await weatherResponse.json();
+                
+                if (!weatherData.daily || !weatherData.daily.temperature_2m_max) {
+                    throw new Error('Could not fetch weather data for this location and date.');
+                }
+
+                // Display weather results
+                displayWeatherResults(`${place.name}, ${place.country}`, date, weatherData.daily);
+
+                // Hide loading message on success
+                document.getElementById('loading-message').style.display = 'none';
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('error-message').textContent = error.message;
+                document.getElementById('error-message').style.display = 'block';
+                document.getElementById('loading-message').style.display = 'none';
+            }
+        });
+
+        // Display weather results
+        function displayWeatherResults(locationName, date, dailyData) {
+            document.getElementById('result-location').textContent = locationName;
+            document.getElementById('result-date').textContent = formatDate(date);
+            document.getElementById('result-max-temp').textContent = `${dailyData.temperature_2m_max[0]}°C`;
+            document.getElementById('result-min-temp').textContent = `${dailyData.temperature_2m_min[0]}°C`;
+            document.getElementById('result-temperature').textContent = `${dailyData.temperature_2m_max[0]}°C`;
+            document.getElementById('result-precipitation').textContent = `${dailyData.precipitation_probability_mean[0]}%`;
+            document.getElementById('result-wind').textContent = `${dailyData.windspeed_10m_max[0]} km/h`;
+            
+            const weatherDescription = getWeatherDescription(dailyData.weathercode[0]);
+            document.getElementById('result-description').textContent = weatherDescription;
+            
+            const weatherIcon = getWeatherIcon(dailyData.weathercode[0]);
+            document.getElementById('weather-icon').textContent = weatherIcon;
+            
+            // Generate a random AQI for demonstration
+            const aqiValues = [25, 45, 68, 102, 155, 210];
+            const randomAqi = aqiValues[Math.floor(Math.random() * aqiValues.length)];
+            document.getElementById('result-aqi').textContent = `${randomAqi} (${getAQIDescription(randomAqi)})`;
+            
+            // Set AQI badge color based on value
+            const aqiBadge = document.getElementById('result-aqi');
+            aqiBadge.className = 'aqi-badge ';
+            if (randomAqi <= 50) aqiBadge.classList.add('aqi-good');
+            else if (randomAqi <= 100) aqiBadge.classList.add('aqi-moderate');
+            else if (randomAqi <= 150) aqiBadge.classList.add('aqi-unhealthy');
+            else if (randomAqi <= 200) aqiBadge.classList.add('aqi-very-unhealthy');
+            else aqiBadge.classList.add('aqi-hazardous');
+            
+            document.getElementById('weather-results').style.display = 'block';
+        }
+
+        // Helper function to format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+
+        // Helper function to get AQI description
+        function getAQIDescription(aqi) {
+            if (aqi <= 50) return 'Good';
+            else if (aqi <= 100) return 'Moderate';
+            else if (aqi <= 150) return 'Unhealthy for Sensitive Groups';
+            else if (aqi <= 200) return 'Unhealthy';
+            else if (aqi <= 300) return 'Very Unhealthy';
+            else return 'Hazardous';
+        }
+
+        // Helper function to get weather description from code
+        function getWeatherDescription(weatherCode) {
+            const weatherMap = {
+                0: "Clear sky",
+                1: "Mainly clear",
+                2: "Partly cloudy",
+                3: "Overcast",
+                45: "Fog",
+                48: "Freezing fog",
+                51: "Light drizzle",
+                53: "Moderate drizzle",
+                55: "Dense drizzle",
+                56: "Light freezing drizzle",
+                57: "Dense freezing drizzle",
+                61: "Slight rain",
+                63: "Moderate rain",
+                65: "Heavy rain",
+                66: "Light freezing rain",
+                67: "Heavy freezing rain",
+                71: "Slight snow",
+                73: "Moderate snow",
+                75: "Heavy snow",
+                77: "Snow grains",
+                80: "Slight rain showers",
+                81: "Moderate rain showers",
+                82: "Violent rain showers",
+                85: "Slight snow showers",
+                86: "Heavy snow showers",
+                95: "Thunderstorm",
+                96: "Thunderstorm with hail",
+                99: "Thunderstorm with heavy hail"
+            };
+            return weatherMap[weatherCode] || "Unknown";
+        }
+
+        // Helper function to get weather icon from code
+        function getWeatherIcon(weatherCode) {
+            const iconMap = {
+                0: "☀️",
+                1: "🌤️",
+                2: "⛅",
+                3: "☁️",
+                45: "🌫️",
+                48: "🌫️",
+                51: "🌦️",
+                53: "🌦️",
+                55: "🌧️",
+                56: "🌧️",
+                57: "🌧️",
+                61: "🌧️",
+                63: "🌧️",
+                65: "⛈️",
+                66: "🌨️",
+                67: "🌨️",
+                71: "❄️",
+                73: "❄️",
+                75: "❄️",
+                77: "❄️",
+                80: "🌦️",
+                81: "🌧️",
+                82: "⛈️",
+                85: "🌨️",
+                86: "🌨️",
+                95: "⛈️",
+                96: "⛈️",
+                99: "⛈️"
+            };
+            return iconMap[weatherCode] || "🌍";
+        }
+
+        // Set default date to today
+        const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0];
+        document.getElementById('date').value = formattedDate;
+        
+        // Set default city
+        document.getElementById('location').value = "Cairo";
+    </script>
+</body>
+</html>
